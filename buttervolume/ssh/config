@@ -1,0 +1,7 @@
+Host 163.172.101.141
+    StrictHostKeyChecking no
+Host 163.172.101.142
+    StrictHostKeyChecking no
+Host 163.172.101.143
+    StrictHostKeyChecking no
+
