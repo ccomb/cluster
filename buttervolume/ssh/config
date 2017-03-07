@@ -4,4 +4,9 @@ Host 163.172.101.142
     StrictHostKeyChecking no
 Host 163.172.101.143
     StrictHostKeyChecking no
-
+Host 10.91.210.57
+    StrictHostKeyChecking no
+Host 10.91.210.58
+    StrictHostKeyChecking no
+Host 10.91.210.59
+    StrictHostKeyChecking no
