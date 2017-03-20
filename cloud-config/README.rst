@@ -14,8 +14,10 @@ Commande et install d'un nouveau serveur :
     cd cluster/cloud-config
     sudo ./install.sh  # ce script peut être lancé plusieurs fois
     reboot
-- Se connecter de nouveau comme mlf puis ::
-    cd cluster
+- Se connecter de nouveau comme mlf puis démarrer buttervolume puis le reste::
+    cd cluster/buttervolume
+    docker-compose up -d
+    cd ..
     docker-compose up -d
 
 
