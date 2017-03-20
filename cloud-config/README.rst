@@ -37,3 +37,5 @@ Checklist après install
     systemctl status docker
 - docker-compose est installé::
     docker-compose -h
+- les 4 services sont en fonctionnement::
+    docker ps
