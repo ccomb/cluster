@@ -104,4 +104,7 @@ fi
 # enable docker
 systemctl enable docker
 
-echo ':)'
+echo 'ok :)'
+echo please reboot!
+
+
