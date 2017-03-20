@@ -1,8 +1,6 @@
 #cloud-config
 ${LOGNAME}
 hostname: ${hostname}
-ssh_authorized_keys:
-    - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAt5C+jF0KRK7VUBrfUjh4KDN6I2WnHMpDIEMXP0hw+1xyhSfp3fDjIeiUIEEV4TjjrrgbT9vXWB99Wb/ktUZZX5V27RKptnX5QWyjEzsH2ITaylyYY54IHvPRf4XBhXOmRgl9255sFZ7EIa++v1xE3bkTGB+EIzUNaRL9ykZ4/UE= ccomb@portouf
 
 write_files:
     -
@@ -17,13 +15,18 @@ write_files:
         content: "COREOS_PUBLIC_IPV4=${public_ip}\nCOREOS_PRIVATE_IPV4=${private_ip}\n"
 users:
     -
-        name: ccomb
+        name: mlf
         passwd: "!"
         groups:
             - sudo
             - docker
         ssh-authorized-keys:
             - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAt5C+jF0KRK7VUBrfUjh4KDN6I2WnHMpDIEMXP0hw+1xyhSfp3fDjIeiUIEEV4TjjrrgbT9vXWB99Wb/ktUZZX5V27RKptnX5QWyjEzsH2ITaylyYY54IHvPRf4XBhXOmRgl9255sFZ7EIa++v1xE3bkTGB+EIzUNaRL9ykZ4/UE= ccomb@portouf
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1oEs5NIGagD2CB+KFEUw0Aj0qD/AuPqCpXXc+wyUlmH5Vl4JCTFyR1q20cO8TNg4Obz07nHceDYNySMOE7asRPRJF4OvNfMlOH5A2zu9RWz/JHZozX0vrUGMdFha8qGHWAJRzZC9+SrGxtldEUQFkf41TtkrPzpXWSz4XdLUIUjvwatykvYLq9BgTRjPDNu5ZWRv7Te1HykmO8ve+b/6YJ/pANv5XsifJDxS+9oG+RISS8wtYxIYoZKe/DLqki6kefAroDkj4QPp5L4isJRAsHVpBNWWgj2gEFlNlKsdCVTeH8hUCgBTDvbAwhB5PDhUVkTulYBe5IRm8jnbsLZzJ pverkest@petrus-v
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiZWDwAd0yMaz2fZC16m+x5CnjvPaM+9Li1XxhgE9RXxeyi839ReQV4A9MsXP9O9zK2rioaOnNGgl7Sd2hh4qNzutcz0tA6dxjuJlkZ+ZOw+dfjjk28LWmuYWQCjwh+PU9QkZvmi3XGWuK6oQYW48g1sWGT7kx7ZAa66Skazz1yjjv/SAkCiK1NNuA+TgzJlBUQwAx45DWbkt3X/TArFyUNE1VsEFdcPUgr9SYRTy5mMY26Q1ul8yWcZX6Kd1QoT6mv60uf+vGPQ4qOAw7mkW46a9lM+VVbxuIxyxypXwzBvuky1f71NzpPA9bRrgkp8hIng3NRNAfyojDGAFdVS7P wanoo@YogaBook
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKjIVaHpZZL4cbMOPe8a/OdxbtT/jfupBKtvc9CQmwAML8GJHtHfr+rVCDRVTHQm3XOfS+5BiIHs3sy1olsFmlSnMHVHnUR1CbNvAsVX7queXABW6xmyOEaXeIwfutB7VC1qxVVpNBW6LubX1Ht7AG3U8762dgsRLlfDMvH1rk6gF7lZOonBLiq9BWUXLNu7lK5k3VVrlrYjMqL8zqFANXBUj7elCjEhQovNxkniGa0WwBrUhZcpAucxDMzCfWKu3XtLJM/+oZ8uZHxoZ8Z6Rqpi/45hPzNO4dSmnAeV7Th/IqieAETlxH5VBlLUQsWDuTQS7tSML35yW6B4sRBpsB eroug@RAMSES
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDsQY8mKScAkaAF5hEPIQt2mIVvClryGdSwUqiIQOcGdrycLJDMnlAW/YI/mmX+HJ4Aa/CYbYRZuhpSXTLE3P2AddSZRIYzp6Ip4qfAD3R/09/Xe9p339wHT9JTnX6Iu/MIZsjFSDeSVsIMcZTqGRIMMG281kgStoYN1rMrvOap6MB+7Cn5Fjm8yhbIqypx+2/Rubg4Aa8MNDo0JtFrGE+otn4NQjZT2o6ApqSHnKnXaoZUPCu0Le+P9MOz2YKFmO6BD1Ol29tZlXnqp4mSXHlKJ0pnTK3pEb/xIjSQvwk8m5Mz+xtnxYmYyVhpR7WWwh81fDH+BsGCEW7iazc/6JAp wanoo@Wanoo
+
 coreos:
     update:
       reboot-strategy: off
