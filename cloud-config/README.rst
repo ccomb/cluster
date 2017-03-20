@@ -31,7 +31,7 @@ Checklist après install
 - le SAN est présent sur /dev/sdd mais non monté::
     cat /proc/partitions
     mount
-- docker est actif et démarré::
+- docker est activé et démarré::
     systemctl status docker
 - docker-compose est installé::
-    which docker-compose
+    docker-compose -h
