@@ -22,6 +22,7 @@ read san_address
 
 
 # backup original cloud-config file
+CLOUD_CONFIG=/var/lib/coreos-install/user_data
 if [ ! -e $CLOUD_CONFIG.bkp ]; then
     echo Creating backup of original config in $CLOUD_CONFIG.bkp...
     cp -a $CLOUD_CONFIG $CLOUD_CONFIG.bkp
@@ -32,7 +33,6 @@ fi
 
 # create and install a new cloud-config file from the template
 echo Creating a new cloud-config file in $CLOUD_CONFIG...
-CLOUD_CONFIG=/var/lib/coreos-install/user_data
 TEMPFILE=`mktemp`
 trap 'rm -f $TEMPFILE' 0 1 2 3 15
 (
