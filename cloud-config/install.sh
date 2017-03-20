@@ -61,19 +61,24 @@ fi
 if ! btrfs device scan /dev/sdb /dev/sdc; then
     echo Formatting /dev/sdb and /dev/sdc as BTRFS raid0...
     mkfs.btrfs -f /dev/sdb /dev/sdc
-    mkdir -p /mnt/local
-    mount /dev/sdb /mnt/local
-    echo Creating BTRFS subvolume for docker volumes...
-    btrfs subvolume create /mnt/local/volumes
-    echo Creating BTRFS subvolume for buttervolume snapshots...
-    btrfs subvolume create /mnt/local/snapshots
-    umount /mnt/local
-    rmdir /mnt/local
     echo done
 else
     echo BTRFS filesystem already existing in /dev/sdb and /dev/sdc
 fi
 
+# create needed subvolumes
+mkdir -p /mnt/local
+mount /dev/sdb /mnt/local
+if [ ! -e /mnt/local/volumes ]; then
+    echo Creating BTRFS subvolume for docker volumes...
+    btrfs subvolume create /mnt/local/volumes
+fi
+if [ ! -e /mnt/local/snapshots ]; then
+    echo Creating BTRFS subvolume for buttervolume snapshots...
+    btrfs subvolume create /mnt/local/snapshots
+fi
+umount /mnt/local
+rmdir /mnt/local
 
 # Add the SAN volume
 if [ ! -e /dev/sdd ]; then

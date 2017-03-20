@@ -2,6 +2,7 @@ cloud-config
 ============
 
 Commande et install d'un nouveau serveur :
+------------------------------------------
 
 - S'il s'agit d'une réinstall complète, reformatter d'abord /dev/sdb et /dev/sdc
 - Sur la console online, pendant la configuration initiale créer un user : mlf
@@ -16,3 +17,21 @@ Commande et install d'un nouveau serveur :
 - Se connecter de nouveau comme mlf puis ::
     cd cluster
     docker-compose up -d
+
+
+Checklist après install
+-----------------------
+
+- le nouveau cloud-config est en place::
+    sudo more /var/lib/coreos-install/user_data
+- les 2 interfaces réseau sont bien activées et ont chacune leur IP::
+    ip address
+- Dans /var/lib/docker/, volumes et snapshots sont des points de montage vers un volume btrfs::
+    mount
+- le SAN est présent sur /dev/sdd mais non monté::
+    cat /proc/partitions
+    mount
+- docker est actif et démarré::
+    systemctl status docker
+- docker-compose est installé::
+    which docker-compose
