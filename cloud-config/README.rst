@@ -12,7 +12,7 @@ Commande et install d'un nouveau serveur :
     # ajouter la clépublique au gitlab, puis:
     git clone ssh://git@git.mlfmonde.org:2222/hebergement/cluster.git
     cd cluster/cloud-config
-    sudo ./install.sh
+    sudo ./install.sh  # ce script peut être lancé plusieurs fois
     reboot
 - Se connecter de nouveau comme mlf puis ::
     cd cluster
