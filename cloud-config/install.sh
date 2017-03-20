@@ -81,4 +81,6 @@ else
     echo docker-compose already installed
 fi
 
+# enable docker
+systemctl enable docker
 
