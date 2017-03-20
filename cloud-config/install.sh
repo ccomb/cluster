@@ -94,7 +94,7 @@ fi
 # install docker-compose
 if ! which docker-compose; then
     mkdir -p /opt/bin
-    curl -L `curl -s https://api.github.com/repos/docker/compose/releases/1.11.2 | jq -r '.assets[].browser_download_url | select(contains("Linux") and contains("x86_64"))'` > /opt/bin/docker-compose
+    curl -Lf https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /opt/bin/docker-compose
     chmod +x /opt/bin/docker-compose
 else
     echo docker-compose already installed
