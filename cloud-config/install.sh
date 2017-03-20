@@ -1,13 +1,13 @@
 #!/bin/bash
 
+set -e
+
 # execute as root
 if [ "$LOGNAME" != "root" ]; then
     echo Please execute as root or by using sudo
+    echo ':('
     exit 1
 fi
-
-# update coreos first
-update_engine_client -update
 
 
 # questions
@@ -41,9 +41,20 @@ trap 'rm -f $TEMPFILE' 0 1 2 3 15
     echo 'END_OF_TEXT'
 ) > $TEMPFILE
 . $TEMPFILE > user_data
-mv user_data $CLOUD_CONFIG
-chown root: $CLOUD_CONFIG
-chmod 600 /var/lib/coreos-install/user_data
+
+
+# apply the new cloud-config file
+if coreos-cloudinit -validate --from-file user_data; then
+    echo Applying the new config file...
+    mv user_data $CLOUD_CONFIG
+    chown root: $CLOUD_CONFIG
+    chmod 600 /var/lib/coreos-install/user_data
+    coreos-cloudinit --from-file user_data
+else
+    echo Generated cloud-config file is invalid. Please fix it
+    echo ':('
+    exit 1
+fi
 
 
 # initialize the local disks
@@ -71,10 +82,10 @@ if [ ! -e /dev/sdd ]; then
     iscsiadm -m node -T $IQN --login
     systemctl enable iscsid
     systemctl start iscsid
-    mkdir -p /mnt/san
-    mount /dev/sdd /mnt/san
-    btrfs subvolume create /mnt/san/nextcloud
-    umount /mnt/san
+    #mkdir -p /mnt/san
+    #mount /dev/sdd /mnt/san
+    #btrfs subvolume create /mnt/san/nextcloud
+    #umount /mnt/san
 else
     echo RPN-SAN is already available
 fi
@@ -93,3 +104,4 @@ fi
 # enable docker
 systemctl enable docker
 
+echo ':)'
