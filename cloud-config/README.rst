@@ -3,6 +3,7 @@ cloud-config
 
 Commande et install d'un nouveau serveur :
 
+- S'il s'agit d'une réinstall complète, reformatter d'abord /dev/sdb et /dev/sdc
 - Sur la console online, pendant la configuration initiale créer un user : mlf
 - Ajouter le serveur au groupe RPN dans la console online et attendre 10min
 - Démarrer le serveur et se connecter comme mlf, puis ::
