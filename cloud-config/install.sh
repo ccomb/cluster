@@ -49,7 +49,7 @@ if coreos-cloudinit -validate --from-file user_data; then
     mv user_data $CLOUD_CONFIG
     chown root: $CLOUD_CONFIG
     chmod 600 /var/lib/coreos-install/user_data
-    coreos-cloudinit --from-file user_data
+    coreos-cloudinit --from-file $CLOUD_CONFIG
 else
     echo Generated cloud-config file is invalid. Please fix it
     echo ':('
