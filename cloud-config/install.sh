@@ -6,6 +6,9 @@ if [ "$LOGNAME" != "root" ]; then
     exit 1
 fi
 
+# update coreos first
+update_engine_client -update
+
 
 # questions
 echo -n "Hostname of the cluster node : "
@@ -17,6 +20,7 @@ read private_ip
 echo -n "address of the SAN (such as san-hdd-14.rpn.online.net): "
 read san_address
 
+
 # backup original cloud-config file
 if [ ! -e $CLOUD_CONFIG.bkp ]; then
     echo Creating backup of original config in $CLOUD_CONFIG.bkp...
@@ -24,6 +28,7 @@ if [ ! -e $CLOUD_CONFIG.bkp ]; then
 else
     echo Cloud-config original config already backuped as $CLOUD_CONFIG.bkp
 fi
+
 
 # create and install a new cloud-config file from the template
 echo Creating a new cloud-config file in $CLOUD_CONFIG...
@@ -39,6 +44,7 @@ trap 'rm -f $TEMPFILE' 0 1 2 3 15
 mv user_data $CLOUD_CONFIG
 chown root: $CLOUD_CONFIG
 chmod 600 /var/lib/coreos-install/user_data
+
 
 # initialize the local disks
 if ! btrfs device scan /dev/sdb /dev/sdc; then
@@ -57,6 +63,7 @@ else
     echo BTRFS filesystem already existing in /dev/sdb and /dev/sdc
 fi
 
+
 # Add the SAN volume
 if [ ! -e /dev/sdd ]; then
     echo Adding the RPN-SAN to the system...
@@ -72,6 +79,7 @@ else
     echo RPN-SAN is already available
 fi
 
+
 # install docker-compose
 if ! which docker-compose; then
     mkdir -p /opt/bin
@@ -80,6 +88,7 @@ if ! which docker-compose; then
 else
     echo docker-compose already installed
 fi
+
 
 # enable docker
 systemctl enable docker
