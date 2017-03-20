@@ -58,7 +58,7 @@ else
 fi
 
 # Add the SAN volume
-if [ $(iscsiadm -m nod | wc -l) -ne 1 ]; then
+if [ ! -e /dev/sdd ]; then
     echo Adding the RPN-SAN to the system...
     IQN=$(iscsiadm -m discovery -t sendtargets -p  $san_address | awk '{print $2}')
     iscsiadm -m node -T $IQN --login
