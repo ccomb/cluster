@@ -101,7 +101,6 @@ if [ ! -e /dev/sdd ]; then
     IQN=$(iscsiadm -m discovery -t sendtargets -p  $san_address | awk '{print $2}')
     iscsiadm -m node -T $IQN --login
     systemctl enable iscsid
-    systemctl start iscsid
     #mkdir -p /mnt/san
     #mount /dev/sdd /mnt/san
     #btrfs subvolume create /mnt/san/nextcloud
