@@ -17,6 +17,7 @@ Commande et install d'un nouveau serveur :
     reboot
 
 - Se connecter de nouveau comme mlf puis démarrer buttervolume puis le reste::
+
     cd cluster/buttervolume
     docker-compose up -d
     cd ..
