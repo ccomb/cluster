@@ -80,6 +80,21 @@ fi
 umount /mnt/local
 rmdir /mnt/local
 
+
+# install docker-compose
+if ! which docker-compose; then
+    mkdir -p /opt/bin
+    curl -Lf https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /opt/bin/docker-compose
+    chmod +x /opt/bin/docker-compose
+else
+    echo docker-compose already installed
+fi
+
+
+# enable docker
+systemctl enable docker
+
+
 # Add the SAN volume
 if [ ! -e /dev/sdd ]; then
     echo Adding the RPN-SAN to the system...
@@ -95,19 +110,6 @@ else
     echo RPN-SAN is already available
 fi
 
-
-# install docker-compose
-if ! which docker-compose; then
-    mkdir -p /opt/bin
-    curl -Lf https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /opt/bin/docker-compose
-    chmod +x /opt/bin/docker-compose
-else
-    echo docker-compose already installed
-fi
-
-
-# enable docker
-systemctl enable docker
 
 echo 'ok :)'
 echo please reboot!
