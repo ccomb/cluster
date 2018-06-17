@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
 
   caddy:
@@ -9,28 +9,20 @@ services:
       - ./caddy/conf/:/etc/caddy
       - ./caddy/www/:/srv
 
-  haproxy:
-    image: haproxy:1.8
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "1443:1443"
-    volumes:
-      - ./haproxy/conf/:/usr/local/etc/haproxy/
-      - ./haproxy/www/:/var/www/
-
   rsyslog:
     image: rsyslog/syslog_appliance_alpine
+    deploy:
+      mode: global
     restart: unless-stopped
     volumes:
       - ./rsyslog/rsyslog.conf:/etc/rsyslog.conf
       - rsyslog_work:/work
       - ./rsyslog/logs:/logs
 
-
   consul:
     build: consul
+    deploy:
+      mode: global
     depends_on:
       - caddy
       - haproxy

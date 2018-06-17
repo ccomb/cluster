@@ -348,7 +348,7 @@ class Application(object):
     def up(self):
         if self.path and exists(self.path):
             log.info("Starting %s", self.name)
-            do('docker-compose -p "{}" up -d'
+            do('docker stack deploy --compose-file docker-compose.yml {}'
                .format(self.project),
                cwd=self.path)
         else:
