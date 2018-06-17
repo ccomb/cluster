@@ -20,7 +20,7 @@ services:
       - ./rsyslog/logs:/logs
 
   consul:
-    build: consul
+    image: registry.gitlab.gorfou.fr/r/cluster_consul
     deploy:
       mode: global
     depends_on:
